@@ -1,0 +1,46 @@
+You are given a string 'str' of length 'N'.
+
+
+Your task is to reverse the original string word by word.
+
+There can be multiple spaces between two words and there can be leading or trailing spaces but in the output reversed string you need to put a single space between two words, and your reversed string should not contain leading or trailing spaces.
+
+Example :
+If the given input string is "Welcome to Coding Ninjas", then you should return "Ninjas Coding to Welcome" as the reversed string has only a single space between two words and there is no leading or trailing space.
+
+Code:
+public class Solution 
+{
+	public static String reverseString(String str) 
+	{
+		//Write your code here
+		String[] words=str.trim().split("\\s+");
+
+		StringBuilder sb= new StringBuilder();
+
+		for(int i=words.length-1;i>=0;i--){
+			sb.append(words[i]);
+		if(i!=0) sb.append(" ");
+		}
+		return sb.toString();
+		
+	}
+}
+🧮 Time Complexity
+	1.	str.trim() → O(N)
+	•	Scans the string to remove leading/trailing spaces
+	2.	split("\\s+") → O(N)
+	•	Scans the string and splits into words
+	3.	Loop to append words → O(N)
+	•	Each character in each word is appended once to StringBuilder
+
+✅ Total Time Complexity = O(N)
+(where N = length of input string)
+
+⸻
+
+💾 Space Complexity
+	1.	words array → stores all words → O(N)
+	2.	StringBuilder sb → stores reversed string → O(N)
+
+✅ Total Space Complexity = O(N)
