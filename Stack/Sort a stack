@@ -1,0 +1,48 @@
+import java.util.Stack;
+
+public class Solution {
+
+    public static void sortStack(Stack<Integer> stack) {
+        if (stack.isEmpty()) return;
+
+        int top = stack.pop();          // remove top element
+        sortStack(stack);               // sort the remaining stack
+        insertSorted(stack, top);       // insert the popped element in sorted order
+    }
+
+    private static void insertSorted(Stack<Integer> stack, int element) {
+        // If stack is empty or element is greater than top, push it
+        if (stack.isEmpty() || element > stack.peek()) {
+            stack.push(element);
+            return;
+        }
+
+        int top = stack.pop();          // remove top
+        insertSorted(stack, element);   // recursive call
+        stack.push(top);                // put back the top
+    }
+}
+Time Complexity (TC)
+
+We have two functions:
+	1.	sortStack(stack) → pops 1 element and recursively sorts the rest.
+	2.	insertSorted(stack, element) → inserts the element into the correct position.
+
+Analysis:
+	•	sortStack is called n times (once for each element).
+	•	insertSorted may pop and push up to n elements in the worst case.
+	•	So, for the first element → 1 insertion step
+	•	Second element → 2 insertion steps
+	•	… last element → n insertion steps
+
+Total operations ≈ 1 + 2 + 3 + … + n = O(n²)
+
+✅ Time Complexity = O(n²)
+Space Complexity (SC)
+	•	Auxiliary stack space due to recursion:
+	•	sortStack recursion depth → n
+	•	insertSorted recursion depth → n (nested calls)
+	•	So in worst case, space used by recursion = O(n)
+	•	No extra data structures used aside from recursion.
+
+✅ Space Complexity = O(n)
